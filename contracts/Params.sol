@@ -1,4 +1,5 @@
-pragma solidity >=0.6.0 <0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
 contract Params {
     bool public initialized;
@@ -13,11 +14,20 @@ contract Params {
 
     // System params
     uint16 public constant MaxValidators = 21;
+
+    // Separate minimal staking requirements
+    uint256 public constant MinimalStakingCoinValidator = 1000 ether; // Minimum for validators
+    uint256 public constant MinimalStakingCoinStaker = 100 ether; // Minimum for stakers
+
+    uint256 public constant ValidatorShare = 70; // 70% for validator
+
     // Validator have to wait StakingLockPeriod blocks to withdraw staking
     uint64 public constant StakingLockPeriod = 86400;
+    
     // Validator have to wait WithdrawProfitPeriod blocks to withdraw his profits
     uint64 public constant WithdrawProfitPeriod = 28800;
-    uint256 public constant MinimalStakingCoin = 32 ether;
+
+    //uint256 public constant MinimalStakingCoin = 32 ether;
 
     modifier onlyMiner() {
         require(msg.sender == block.coinbase, "Miner only");

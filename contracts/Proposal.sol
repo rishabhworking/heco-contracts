@@ -1,4 +1,5 @@
-pragma solidity >=0.6.0 <0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
 
 import "./Params.sol";
 import "./Validators.sol";
@@ -72,7 +73,7 @@ contract Proposal is Params {
 
     function initialize(address[] calldata vals) external onlyNotInitialized {
         proposalLastingPeriod = 7 days;
-        validators = Validators(ValidatorContractAddr);
+        validators = Validators(payable(ValidatorContractAddr));
 
         for (uint256 i = 0; i < vals.length; i++) {
             require(vals[i] != address(0), "Invalid validator address");
